@@ -11,10 +11,8 @@ const handler = nc()
     .use(upload.single('file'))
     .post(async (req: any, res: NextApiResponse<RespostaPadraoMsg>) => {
         try {
-
             console.log(req.file);
-
-            const { userId } = req.query;
+            const {userId} = req.query;
             const usuario = await UsuarioModel.findById(userId);
             if (!usuario) {
                 return res.status(400).json({ erro: 'Usuario nao encontrado' });

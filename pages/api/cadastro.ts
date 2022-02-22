@@ -11,11 +11,8 @@ const handler = nc()
     .use(upload.single('file'))
     .post(async (req: any, res: NextApiResponse<RespostaPadraoMsg>) => {
         try {
-
-            console.log(req.file)
-
+            console.log(req.file);
             const usuario = req.body;
-
             if (!usuario.nome || usuario.nome.length < 2) {
                 return res.status(400).json({ erro: 'Nome invalido' });
             }
