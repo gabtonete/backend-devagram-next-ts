@@ -1,17 +1,17 @@
+import nc from 'next-connect';
 import type { NextApiResponse } from 'next';
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg';
 import { UsuarioModel } from '../../models/UsuarioModel';
 import { conectarMongoDB } from '../../middlewares/conectarMongoDB';
 import md5 from 'md5';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
-import nc from 'next-connect';
 
 
 const handler = nc()
     .use(upload.single('file'))
     .post(async (req: any, res: NextApiResponse<RespostaPadraoMsg>) => {
         try {
-            console.log(req.file);
+            //console.log(req.file);
             const usuario = req.body;
             if (!usuario.nome || usuario.nome.length < 2) {
                 return res.status(400).json({ erro: 'Nome invalido' });
@@ -36,7 +36,10 @@ const handler = nc()
             // enviar a imagem do multer para o cosmic
 
             const image = await uploadImagemCosmic(req);
-
+            
+            if (!image?.media?.url){
+                return res.status(400).json({ erro: "Avatar não informado"});
+            }
             // salvar no banco de dados
             const usuarioASerSalvo = {
                 nome: usuario.nome,
