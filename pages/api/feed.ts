@@ -10,7 +10,7 @@ import { politicaCors } from '../../middlewares/politicaCors';
 const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPadraoMsg | any>) => {
     try { 
         if(req.method === 'GET') {
-            if (req?.query?.userId) {
+            if (req?.query?.id) {
                 // agora q tenho o id do usuario
                 // como eu valido se o usuario valido
                 const usuario = await UsuarioModel.findById(req?.query?.userId);

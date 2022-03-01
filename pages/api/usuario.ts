@@ -31,8 +31,7 @@ const handler = nc()
                     usuario.avatar = image.media.url;
                 } 
             }
-
-    
+            
             await UsuarioModel
                 .findByIdAndUpdate({_id : usuario._id}, usuario);
 
