@@ -36,4 +36,4 @@ const endpointLogin = async (
     return res.status(405).json({erro : 'Metodo informado nao e valido'});
 }
 
-export default conectarMongoDB(endpointLogin);
+export default politicaCors(conectarMongoDB(endpointLogin));

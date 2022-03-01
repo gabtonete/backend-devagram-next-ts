@@ -48,4 +48,4 @@ const likeEndpoint
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(likeEndpoint));
+export default politicaCors(validarTokenJWT(conectarMongoDB(likeEndpoint)));

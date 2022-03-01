@@ -66,4 +66,4 @@ const endpointSeguir =
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(endpointSeguir)); 
+export default politicaCors(validarTokenJWT(conectarMongoDB(endpointSeguir))); 

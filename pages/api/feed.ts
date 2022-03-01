@@ -68,4 +68,4 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
     return res.status(400).json({ erro: 'Nao foi possivel obter o feed' });
 }
 
-export default validarTokenJWT(conectarMongoDB(feedEndpoint));
+export default politicaCors(validarTokenJWT(conectarMongoDB(feedEndpoint)));

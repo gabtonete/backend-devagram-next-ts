@@ -19,7 +19,7 @@ const handler = nc()
                 return res.status(400).json({erro : 'Usuario nao encontrado'});
             }
 
-            const {nome} = req.body;
+            const {nome} = req?.body;
             if(nome && nome.length > 2){
                 usuario.nome = nome;
             }
@@ -60,4 +60,4 @@ export const config = {
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(handler)); 
+export default politicaCors(validarTokenJWT(conectarMongoDB(handler))); 
