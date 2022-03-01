@@ -3,6 +3,7 @@ import { conectarMongoDB } from '../../middlewares/conectarMongoDB';
 import { validarTokenJWT } from '../../middlewares/validarTokenJWT';
 import { UsuarioModel } from '../../models/UsuarioModel';
 import type {RespostaPadraoMsg} from '../../types/RespostaPadraoMsg';
+import { politicaCors } from '../../middlewares/politicaCors';
 
 const pesquisaEndpoint 
     = async (req : NextApiRequest, res : NextApiResponse<RespostaPadraoMsg | any[]>) => {

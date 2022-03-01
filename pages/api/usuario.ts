@@ -5,6 +5,7 @@ import { UsuarioModel } from '../../models/UsuarioModel';
 import { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg'
 import nc from 'next-connect';
 import {upload, uploadImagemCosmic} from '../../services/uploadImagemCosmic';
+import { politicaCors } from '../../middlewares/politicaCors';
 
 
 const handler = nc()

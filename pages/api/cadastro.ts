@@ -3,6 +3,7 @@ import type { NextApiResponse } from 'next';
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg';
 import { UsuarioModel } from '../../models/UsuarioModel';
 import { conectarMongoDB } from '../../middlewares/conectarMongoDB';
+import { politicaCors } from '../../middlewares/politicaCors';
 import md5 from 'md5';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 
@@ -61,4 +62,4 @@ export const config = {
     }
 }
 
-export default conectarMongoDB(handler);
+export default politicaCors(conectarMongoDB(handler));
