@@ -1,11 +1,15 @@
+import type { NextApiResponse, NextApiRequest } from 'next';
+
+import { politicaCors } from '../../middlewares/politicaCors';
 import {validarTokenJWT} from '../../middlewares/validarTokenJWT';
 import {conectarMongoDB} from '../../middlewares/conectarMongoDB';
-import type { NextApiResponse, NextApiRequest } from 'next';
+
 import { UsuarioModel } from '../../models/UsuarioModel';
+
 import { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg'
+
 import nc from 'next-connect';
 import {upload, uploadImagemCosmic} from '../../services/uploadImagemCosmic';
-import { politicaCors } from '../../middlewares/politicaCors';
 
 
 const handler = nc()

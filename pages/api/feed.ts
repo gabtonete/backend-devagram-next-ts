@@ -18,7 +18,7 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<RespostaPa
                 if (!usuario) {
                     return res.status(400).json({ erro: 'Usuario nao encontrado' });
                 }
-        
+
                 // e como eu busco as publicacoes dele?
                 const publicacoes = await PublicacaoModel
                     .find({ idUsuario: usuario._id })
