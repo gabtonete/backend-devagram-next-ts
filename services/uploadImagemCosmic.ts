@@ -5,7 +5,8 @@ const {
     CHAVE_GRAVACAO_AVATARES,
     CHAVE_GRAVACAO_PUBLICACOES,
     BUCKET_AVATARES,
-    BUCKET_PUBLICACOES} = process.env;
+    BUCKET_PUBLICACOES
+} = process.env;
 
 const Cosmic = cosmicjs();
 const bucketAvatares = Cosmic.bucket({
@@ -18,29 +19,26 @@ const bucketPublicacoes = Cosmic.bucket({
     write_key: CHAVE_GRAVACAO_PUBLICACOES
 });
 
-const storage = multer.memoryStorage();
-const upload = multer({storage : storage});
+const storageType = multer.memoryStorage();
+const upload = multer({ storage : storageType });
 
 const uploadImagemCosmic = async(req : any) => {
-    if(req?.file?.originalname){
-        
-        if(!req.file.originalname.includes('.png') &&
-            !req.file.originalname.includes('.jpg') && 
-            !req.file.originalname.includes('.jpeg')){
-                throw new Error('Extensao da imagem invalida');
-        }
+    try {
+        if(req?.file?.originalname){
+            const media_object = {
+                originalname: req.file.originalname,
+                buffer: req.file.buffer
+            };
 
-        const media_object = {
-            originalname: req.file.originalname,
-            buffer : req.file.buffer
-        };
-
-        if(req.url && req.url.includes('publicacao')){
-            return await bucketPublicacoes.addMedia({media : media_object});
-        }else{
-            return await bucketAvatares.addMedia({media : media_object});
+            if(req.url && req.url.includes('publicacao')){
+                return await bucketPublicacoes.addMedia({ media : media_object });
+            }else{
+                return await bucketAvatares.addMedia({ media : media_object });
+            }
         }
+    } catch (e) {
+        console.log("Não foi possível adicionar imagem, erro=", e);
     }
-}
+};
 
 export {upload, uploadImagemCosmic};
