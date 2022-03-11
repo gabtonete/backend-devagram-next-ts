@@ -33,7 +33,7 @@ const handler = nc()
                 const image = await uploadImagemCosmic(req);
                 if(image && image.media && image.media.url){
                     usuario.avatar = image.media.url;
-                } 
+                }
             }
             
             await UsuarioModel

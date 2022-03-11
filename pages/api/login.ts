@@ -23,17 +23,16 @@ const endpointLogin = async (
 
         const usuariosEncontrados = await UsuarioModel.find({email : login, senha : md5(senha)});
         if(usuariosEncontrados && usuariosEncontrados.length > 0){
-            const usuarioEncotrado = usuariosEncontrados[0];
+            const usuarioEncontrado = usuariosEncontrados[0];
 
-            const token = jwt.sign({_id : usuarioEncotrado._id}, MINHA_CHAVE_JWT);
+            const token = jwt.sign({_id : usuarioEncontrado._id}, MINHA_CHAVE_JWT);
             return res.status(200).json({
-                avatar: usuarioEncotrado.avatar,
-                nome : usuarioEncotrado.nome, 
-                email : usuarioEncotrado.email, 
+                nome : usuarioEncontrado.nome, 
+                email : usuarioEncontrado.email, 
                 token
             });
         }
-        return res.status(400).json({erro : 'Usuario ou senha nao encontrado'});
+        return res.status(400).json({erro : 'E-mail ou senha inválidos'});
     }
     return res.status(405).json({erro : 'Metodo informado nao e valido'});
 }
