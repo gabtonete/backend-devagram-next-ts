@@ -36,9 +36,10 @@ const handler = nc()
             // enviar a imagem do multer para o cosmic
             const image = await uploadImagemCosmic(req);
 
-            if (!image?.media?.url){
+            /*if (!image?.media?.url){
                 return res.status(400).json({ erro: "Avatar não informado"});
-            }
+            }*/
+            
             // salvar no banco de dados
             const usuarioASerSalvo = {
                 nome: usuario.nome,
