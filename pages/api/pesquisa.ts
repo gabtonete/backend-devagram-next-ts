@@ -10,30 +10,33 @@ const pesquisaEndpoint
     = async (req : NextApiRequest, res : NextApiResponse<RespostaPadraoMsg | any[]>) => {
     try{
         if(req.method === 'GET'){
-            const {userId, id} = req?.query;
-            const usuarioLogado = await UsuarioModel.findById(userId);
-            if(!usuarioLogado){
-                return res.status(400).json({erro : 'Usuario logado nao encontrado'});
-            }
-
-            const usuarioASerSeguido = await UsuarioModel.findById(id);
-            if(!usuarioASerSeguido){
-                return res.status(400).json({ erro : 'Usuario a ser seguido nao encontrado'});
-            }
-
             if(req?.query?.id){
-                const euJaSigoEsseUsuario = await SeguidorModel
-                .find({usuarioId: usuarioLogado._id, usuarioSeguidoId : usuarioASerSeguido._id});
+                const { userId, id } = req?.query;
+                const usuarioLogado = await UsuarioModel.findById(userId);
 
-                const usuarioEncontrado = await UsuarioModel.findById(req?.query?.id)
+                if(!usuarioLogado){
+                    return res.status(400).json({ erro : 'Usuario logado nao encontrado' });
+                }
+    
+                const usuarioASerSeguido = await UsuarioModel.findById(id);
+                if(!usuarioASerSeguido){
+                    return res.status(400).json({ erro : 'Usuario a ser seguido nao encontrado' });
+                }
+
+                const euJaSigoEsseUsuario = await SeguidorModel
+                    .find({ usuarioId: usuarioLogado._id, usuarioSeguidoId : usuarioASerSeguido._id });
+                    
+                const usuarioEncontrado = await UsuarioModel.findById(req?.query?.id);
+                euJaSigoEsseUsuario? usuarioEncontrado.segueEsseUsuario = true : false;
+
                 if(!usuarioEncontrado){
                     return res.status(400).json({
                         msg: "usuário não encontrado"
                     })
-                }
+                };
+
                 usuarioEncontrado.senha = null;
                 
-                euJaSigoEsseUsuario? usuarioEncontrado.segueEsseUsuario = true : false;
                 return res.status(200).json(usuarioEncontrado);
             }else{
                 const {filtro} = req.query;
