@@ -22,12 +22,14 @@ const pesquisaEndpoint
                 if(!usuarioASerSeguido){
                     return res.status(400).json({ erro : 'Usuario a ser seguido nao encontrado' });
                 }
+                console.log('logado: ', usuarioLogado.email, 'a ser seguido: ', usuarioASerSeguido.email);
 
                 const euJaSigoEsseUsuario = await SeguidorModel
                     .find({ usuarioId: usuarioLogado._id, usuarioSeguidoId : usuarioASerSeguido._id });
                     
                 const usuarioEncontrado = await UsuarioModel.findById(req?.query?.id);
-                euJaSigoEsseUsuario? usuarioEncontrado.segueEsseUsuario = true : false;
+                
+                euJaSigoEsseUsuario && euJaSigoEsseUsuario.length > 0 ? usuarioEncontrado.segueEsseUsuario = true : false;
 
                 if(!usuarioEncontrado){
                     return res.status(400).json({
