@@ -1,7 +1,7 @@
 # Devagram
 Projeto em Next.js usando Typescript, com integração ao <a href="https://github.com/gabtonete/frontend-devagram-nextjs">front-end aqui</a>
 
-## Dependencies
+## Dependências
 - next 12.1.0
 - mongoose 6.2.2
 - cosmicjs 4.1.2
