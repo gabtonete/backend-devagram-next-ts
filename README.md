@@ -1,8 +1,15 @@
-# Devagram backend project
-Next.js typescript project, priorizating the usability and best coding practices
+# Devagram
+Projeto em Next.js usando Typescript, com integração ao <a href="https://github.com/gabtonete/frontend-devagram-nextjs">front-end aqui</a>
 
 ## Dependencies
-- mongoose to do the MongoDB integration
-- CORS libs shielding the application against any not allowed origin connections
-- cosmicjs and multer doing the application image management
-- jsonwebtoken libs creating a layer of security in the application
+- next 12.1.0
+- mongoose 6.2.2
+- cosmicjs 4.1.2
+- multer 1.4.4
+- jsonwebtoken 8.5.1
+
+## Ambiente de desenvolvimento
+
+1. Execute `npm install` para atualizar as dependências do projeto
+2. Configure as variáveis de ambiente do `.env.local`
+3. Execute `npm run dev` para dar início à aplicação
